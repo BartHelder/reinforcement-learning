@@ -58,6 +58,18 @@ def plot_value_function(V, title="Value Function"):
     plot_surface(X, Y, Z_noace, "{} (No Usable Ace)".format(title))
     plot_surface(X, Y, Z_ace, "{} (Usable Ace)".format(title))
 
+def plot_Q_function(Q, env, title="Policy"):
+    """
+    Plots the resulting policy of a Q-function for a grid-based environment
+    """
+    P = np.zeros(env.nS)
+    for key in Q:
+        P[key] = np.argmax(Q[key])
+    P.reshape(env.shape)
+
+    def plot_surface(P, title):
+        fig = plt.figure(figsize=(20,10))
+
 
 
 def plot_episode_stats(stats, smoothing_window=10, noshow=False):
@@ -68,9 +80,9 @@ def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     plt.ylabel("Episode Length")
     plt.title("Episode Length over Time")
     if noshow:
-        plt.close(fig1)
+        plt.close()
     else:
-        plt.show(fig1)
+        plt.show()
 
     # Plot the episode reward over time
     fig2 = plt.figure(figsize=(10,5))
@@ -80,9 +92,9 @@ def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     plt.ylabel("Episode Reward (Smoothed)")
     plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
     if noshow:
-        plt.close(fig2)
+        plt.close()
     else:
-        plt.show(fig2)
+        plt.show()
 
     # Plot time steps and episode number
     fig3 = plt.figure(figsize=(10,5))
@@ -91,8 +103,8 @@ def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     plt.ylabel("Episode")
     plt.title("Episode per time step")
     if noshow:
-        plt.close(fig3)
+        plt.close()
     else:
-        plt.show(fig3)
+        plt.show()
 
     return fig1, fig2, fig3

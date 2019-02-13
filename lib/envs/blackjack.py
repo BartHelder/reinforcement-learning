@@ -3,9 +3,11 @@ from gym import spaces
 from gym.utils import seeding
 
 def cmp(a, b):
-    return int((a > b)) - int(( a < b))
+    return int((a > b)) - int((a < b))
 
-deck = [1,2,3,4,5,6,7,8,9,10,10,10,10]
+# 1 = Ace, 2-10 = Number cards, Jack/Queen/King = 10
+deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
 
 def draw_card(np_random):
     return np_random.choice(deck)
@@ -74,7 +76,7 @@ class BlackjackEnv(gym.Env):
         # Ref: http://www.bicyclecards.com/how-to-play/blackjack/
         self.natural = natural
         # Start the first game
-        self._reset()        # Number of
+        self._reset()        # Number of 
         self.nA = 2
 
     def reset(self):
@@ -118,4 +120,3 @@ class BlackjackEnv(gym.Env):
             self.player.append(draw_card(self.np_random))
 
         return self._get_obs()
-
