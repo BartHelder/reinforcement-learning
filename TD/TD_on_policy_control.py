@@ -77,7 +77,6 @@ def sarsa(env, num_episodes, discount_factor = 1.0, alpha = 0.5, epsilon = 0.1):
             td_target = reward + discount_factor * Q[next_state][next_action]
             td_delta = td_target - Q[state][action]
             Q[state][action] += alpha * td_delta
-            print(state)
 
             if done:
                 break
